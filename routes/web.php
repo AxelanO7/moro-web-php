@@ -23,6 +23,10 @@ Route::get('/plan', function () {
     return Inertia::render('plan/plan');
 })->name('plan`');
 
+// activity
+Route::get('/activity', function () {
+    return Inertia::render('activity/activity');
+})->name('activity');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

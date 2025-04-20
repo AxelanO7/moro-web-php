@@ -13,3 +13,13 @@ export interface IUser {
     username: string
     password: string
 }
+
+export interface IActivity {
+    id: number,
+    name: string,
+    objective: string,
+    date: string,
+    target: string
+    status: string,
+    file: string,
+}

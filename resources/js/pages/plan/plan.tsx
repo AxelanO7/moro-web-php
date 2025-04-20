@@ -1,4 +1,4 @@
-import CInput from '@/common/components/input';
+import { CInput } from '@/common/components/input';
 import { CTable } from '@/common/components/table';
 import { IPlan } from '@/common/constant/interface_data';
 import { Button } from '@/components/ui/button';
@@ -79,7 +79,7 @@ export default function Plan() {
                 </Dialog>
             }
         >
-            <Head title="Plan" />
+            <Head title="Renja Ormawa" />
             <CTable
                 rootClassName="p-4"
                 tableHeader={tableHead}
