@@ -1,4 +1,4 @@
-import CInput from '@/common/components/input';
+import { CInput } from '@/common/components/input';
 import { CTable, EditDeleteIcon } from '@/common/components/table';
 import { IUser } from '@/common/constant/interface_data';
 import { Button } from '@/components/ui/button';
@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '@/components
 import { TableCell } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
 import { Head } from '@inertiajs/react';
+import clsx from 'clsx';
 import { useState } from 'react';
 
 const tableHead = [
@@ -47,7 +48,7 @@ export default function User() {
             headerButton={
                 <Dialog>
                     <DialogTrigger>
-                        <Button className="btn btn-primary">Tambah</Button>
+                        <Button className={clsx('btn btn-primary')}>Tambah</Button>
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>User</DialogHeader>
@@ -65,7 +66,7 @@ export default function User() {
                             onChange={(e) => setData({ ...data, password: e.target.value })}
                             value={data?.password ?? ''}
                         />
-                        <Button className="btn btn-primary" onClick={() => submit()}>
+                        <Button className={clsx('btn btn-primary')} onClick={() => submit()}>
                             Simpan
                         </Button>
                     </DialogContent>
@@ -73,20 +74,21 @@ export default function User() {
             }
         >
             <Head title="User" />
-            <CTable
-                rootClassName="p-4"
-                tableHeader={tableHead}
-                tableData={invoices}
-                tableBody={(item: IUser) => (
-                    <>
-                        <TableCell className="text-center">{item.name}</TableCell>
-                        <TableCell className="text-center">{item.email}</TableCell>
-                        <TableCell className="text-center">{item.username}</TableCell>
-                        <TableCell className="text-center">{item.password}</TableCell>
-                        <EditDeleteIcon edit={() => edit()} remove={() => remove()} />
-                    </>
-                )}
-            />
+            <div className={clsx('p-4')}>
+                <CTable
+                    tableHeader={tableHead}
+                    tableData={invoices}
+                    tableBody={(item: IUser) => (
+                        <>
+                            <TableCell className={clsx('text-center')}>{item.name}</TableCell>
+                            <TableCell className={clsx('text-center')}>{item.email}</TableCell>
+                            <TableCell className={clsx('text-center')}>{item.username}</TableCell>
+                            <TableCell className={clsx('text-center')}>{item.password}</TableCell>
+                            <EditDeleteIcon edit={() => edit()} remove={() => remove()} />
+                        </>
+                    )}
+                />
+            </div>
         </AppLayout>
     );
 }

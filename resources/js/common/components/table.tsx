@@ -1,5 +1,6 @@
 import { ITable } from '@/common/constant/interface';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Row } from '@/layouts/layout';
 import clsx from 'clsx';
 import { Pencil, Trash } from 'lucide-react';
 
@@ -13,9 +14,9 @@ export const EmptyDataTable = ({ colSpan = 5, message = 'Data tidak ditemukan' }
     );
 };
 
-export const CTable = ({ rootClassName, tableHeader, tableData, tableBody }: ITable) => {
+export const CTable = ({ tableHeader, tableData, tableBody }: ITable) => {
     return (
-        <Table className={rootClassName}>
+        <Table>
             <TableHeader className={clsx('select-none')}>
                 <TableRow>
                     {tableHeader.map((header, index) => (
@@ -56,9 +57,11 @@ export const EditDeleteIcon = ({
     remove: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }) => {
     return (
-        <TableCell className={clsx('flex justify-center gap-8')}>
-            <Pencil className={clsx('cursor-pointer')} onClick={() => edit()} />
-            <Trash className={clsx('cursor-pointer')} onClick={() => remove()} />
+        <TableCell>
+            <Row className={clsx('justify-center gap-4 text-center')}>
+                <Pencil className={clsx('cursor-pointer')} onClick={() => edit()} />
+                <Trash className={clsx('cursor-pointer')} onClick={() => remove()} />
+            </Row>
         </TableCell>
     );
 };

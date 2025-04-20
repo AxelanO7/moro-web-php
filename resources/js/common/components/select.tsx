@@ -1,7 +1,8 @@
+import { ISelect } from '@/common/constant/interface';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Column } from '@/layouts/layout';
 
-export function CSelect({ ...props }) {
+export function CSelect({ ...props }: ISelect) {
     return (
         <Column>
             {props.label && <label htmlFor={props.id}>{props.label}</label>}

@@ -6,7 +6,6 @@ export interface ILayout {
 }
 
 export interface ITable {
-    rootClassName?: string;
     tableHeader: { title: string; key: string; className: string }[];
     tableBody?: any;
     tableData: any[];
@@ -23,4 +22,13 @@ export interface IInput {
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     prefix?: any;
+}
+
+export interface ISelect {
+    id: string;
+    label?: string;
+    value: string;
+    options: { value: string; label: string }[];
+    placeholder?: string;
+    onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
