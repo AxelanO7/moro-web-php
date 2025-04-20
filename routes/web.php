@@ -13,6 +13,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 });
 
+// user
+Route::get('/user', function () {
+    return Inertia::render('user/user');
+})->name('user');
+
 // plan
 Route::get('/plan', function () {
     return Inertia::render('plan/plan');

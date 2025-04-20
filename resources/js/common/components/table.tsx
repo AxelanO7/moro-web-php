@@ -1,11 +1,12 @@
 import { ITable } from '@/common/constant/interface';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import clsx from 'clsx';
+import { Pencil, Trash } from 'lucide-react';
 
 export const EmptyDataTable = ({ colSpan = 5, message = 'Data tidak ditemukan' }: { colSpan?: number; message?: string }) => {
     return (
         <TableRow>
-            <TableCell colSpan={colSpan} className="py-4 text-center">
+            <TableCell colSpan={colSpan} className={clsx('py-4 text-center')}>
                 {message}
             </TableCell>
         </TableRow>
@@ -32,7 +33,7 @@ export const CTable = ({ rootClassName, tableHeader, tableData, tableBody }: ITa
                             tableBody(item, index)
                         ) : (
                             <>
-                                <TableCell className="whitespace-nowrap">{index + 1}</TableCell>
+                                <TableCell className={clsx('whitespace-nowrap')}>{index + 1}</TableCell>
                                 {tableHeader.map((header, index) => (
                                     <TableCell key={index} className={header.className}>
                                         {item[header.key]}
@@ -44,5 +45,20 @@ export const CTable = ({ rootClassName, tableHeader, tableData, tableBody }: ITa
                 ))}
             </TableBody>
         </Table>
+    );
+};
+
+export const EditDeleteIcon = ({
+    edit,
+    remove,
+}: {
+    edit: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    remove: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}) => {
+    return (
+        <TableCell className={clsx('flex justify-center gap-8')}>
+            <Pencil className={clsx('cursor-pointer')} onClick={() => edit()} />
+            <Trash className={clsx('cursor-pointer')} onClick={() => remove()} />
+        </TableCell>
     );
 };

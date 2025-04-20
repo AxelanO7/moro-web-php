@@ -2,10 +2,11 @@ import CInput from '@/common/components/input';
 import { CTable } from '@/common/components/table';
 import { IPlan } from '@/common/constant/interface_data';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '@/components/ui/dialog';
 import { TableCell } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
 import { Head } from '@inertiajs/react';
+import clsx from 'clsx';
 import { Pencil, Trash } from 'lucide-react';
 import { useState } from 'react';
 
@@ -48,9 +49,10 @@ export default function Plan() {
             headerButton={
                 <Dialog>
                     <DialogTrigger>
-                        <Button className="btn btn-primary">Tambah</Button>
+                        <Button className={clsx('btn btn-primary')}>Tambah</Button>
                     </DialogTrigger>
                     <DialogContent>
+                        <DialogHeader>Renja Ormawa</DialogHeader>
                         <CInput id="name" label="Nama" onChange={(e) => setData({ ...data, name: e.target.value })} value={data?.name ?? ''} />
                         <CInput
                             id="objective"
@@ -70,7 +72,7 @@ export default function Plan() {
                             onChange={(e) => setData({ ...data, target: e.target.value })}
                             value={data?.target ?? ''}
                         />
-                        <Button className="btn btn-primary" onClick={() => submit()}>
+                        <Button className={clsx('btn btn-primary')} onClick={() => submit()}>
                             Simpan
                         </Button>
                     </DialogContent>
@@ -84,13 +86,13 @@ export default function Plan() {
                 tableData={invoices}
                 tableBody={(item: IPlan) => (
                     <>
-                        <TableCell className="text-center">{item.name}</TableCell>
-                        <TableCell className="text-center">{item.objective}</TableCell>
-                        <TableCell className="text-center">{item.period}</TableCell>
-                        <TableCell className="text-center">{item.target}</TableCell>
-                        <TableCell className="flex justify-center gap-8">
-                            <Pencil className="cursor-pointer" onClick={() => edit()} />
-                            <Trash className="cursor-pointer" onClick={() => remove()} />
+                        <TableCell className={clsx('text-center')}>{item.name}</TableCell>
+                        <TableCell className={clsx('text-center')}>{item.objective}</TableCell>
+                        <TableCell className={clsx('text-center')}>{item.period}</TableCell>
+                        <TableCell className={clsx('text-center')}>{item.target}</TableCell>
+                        <TableCell className={clsx('flex justify-center gap-8')}>
+                            <Pencil className={clsx('cursor-pointer')} onClick={() => edit()} />
+                            <Trash className={clsx('cursor-pointer')} onClick={() => remove()} />
                         </TableCell>
                     </>
                 )}
