@@ -13,5 +13,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 });
 
+// plan
+Route::get('/plan', function () {
+    return Inertia::render('plan/plan');
+})->name('plan`');
+
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
