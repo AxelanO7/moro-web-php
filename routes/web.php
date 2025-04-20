@@ -22,7 +22,6 @@ Route::get('/user', function () {
 Route::get('/plan', function () {
     return Inertia::render('plan/plan');
 })->name('plan`');
-
 Route::get('/report-plan', function () {
     return Inertia::render('plan/report_plan');
 })->name('report_plan');
@@ -31,10 +30,14 @@ Route::get('/report-plan', function () {
 Route::get('/activity', function () {
     return Inertia::render('activity/activity');
 })->name('activity');
-
 Route::get('/report-activity', function () {
     return Inertia::render('activity/report_activity');
 })->name('report_activity');
+
+// archive
+Route::get('/archive', function () {
+    return Inertia::render('archive/archive');
+})->name('archive');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
