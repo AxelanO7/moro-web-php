@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\PlanController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -25,6 +26,7 @@ Route::get('/plan', function () {
 Route::get('/report-plan', function () {
     return Inertia::render('plan/report_plan');
 })->name('report_plan');
+Route::resource('/api/plan', PlanController::class)->middleware(['auth', 'verified']);
 
 // activity
 Route::get('/activity', function () {

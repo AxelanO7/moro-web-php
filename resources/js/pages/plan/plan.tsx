@@ -1,13 +1,14 @@
 import { CInput } from '@/common/components/input';
 import { CTable, EditDeleteIcon } from '@/common/components/table';
 import { IPlan } from '@/common/constant/interface_data';
+import { ApiHelpers } from '@/common/helpers/api_helper';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '@/components/ui/dialog';
 import { TableCell } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
 import { Head } from '@inertiajs/react';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const tableHead = [
     { title: 'Nama', key: 'name', className: 'text-center' },
@@ -17,30 +18,29 @@ const tableHead = [
     { title: 'Aksi', key: 'action', className: 'text-center' },
 ];
 
-const invoices: IPlan[] = [
-    {
-        id: 1,
-        name: 'John Doe',
-        objective: 'John Doe',
-        period: 'John Doe',
-        target: 'John Doe',
-    },
-];
-
 const breadcrumb = [{ title: 'Renja Ormawa', href: '/plan' }];
 
 export default function Plan() {
-    const [data, setData] = useState<IPlan>({
-        id: 0,
-        name: '',
-        objective: '',
-        period: '',
-        target: '',
-    });
+    const [plans, setPlans] = useState<IPlan[]>([]);
+    const [plan, setPlan] = useState<IPlan>({ id: 0, name: '', objective: '', period: '', target: '' });
 
     const submit = () => {};
     const edit = () => {};
     const remove = () => {};
+
+    const getPlans = () => {
+        ApiHelpers.get({
+            url: '/plan',
+            onSuccess: (res) => {
+                setPlans(res.data.data);
+            },
+            onError: (err) => {},
+        });
+    };
+
+    useEffect(() => {
+        getPlans();
+    }, []);
 
     return (
         <AppLayout
@@ -52,15 +52,15 @@ export default function Plan() {
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>Renja Ormawa</DialogHeader>
-                        <CInput id="name" label="Nama" onChange={(e) => setData({ ...data, name: e.target.value })} value={data.name} />
+                        <CInput id="name" label="Nama" onChange={(e) => setPlan({ ...plan, name: e.target.value })} value={plan.name} />
                         <CInput
                             id="objective"
                             label="Tujuan"
-                            onChange={(e) => setData({ ...data, objective: e.target.value })}
-                            value={data.objective}
+                            onChange={(e) => setPlan({ ...plan, objective: e.target.value })}
+                            value={plan.objective}
                         />
-                        <CInput id="period" label="Periode" onChange={(e) => setData({ ...data, period: e.target.value })} value={data.period} />
-                        <CInput id="target" label="Sasaran" onChange={(e) => setData({ ...data, target: e.target.value })} value={data.target} />
+                        <CInput id="period" label="Periode" onChange={(e) => setPlan({ ...plan, period: e.target.value })} value={plan.period} />
+                        <CInput id="target" label="Sasaran" onChange={(e) => setPlan({ ...plan, target: e.target.value })} value={plan.target} />
                         <Button className={clsx('btn btn-primary')} onClick={() => submit()}>
                             Simpan
                         </Button>
@@ -72,7 +72,7 @@ export default function Plan() {
             <div className={clsx('p-4')}>
                 <CTable
                     tableHeader={tableHead}
-                    tableData={invoices}
+                    tableData={plans}
                     tableBody={(item: IPlan) => (
                         <>
                             <TableCell className={clsx('text-center')}>{item.name}</TableCell>
